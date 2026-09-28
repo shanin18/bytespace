@@ -5,8 +5,11 @@ test('home, search, filters, and accessible mobile navigation', async ({ page })
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/');
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Get access');
-  await page.getByRole('button', { name: 'Pause partner animation' }).click();
-  await expect(page.getByRole('button', { name: 'Play partner animation' })).toBeVisible();
+  await expect(
+    page.getByRole('button', {
+      name: /(?:Pause|Play) partner animation|(?:Pause|Resume) testimonials/,
+    }),
+  ).toHaveCount(0);
   await page.getByRole('textbox', { name: 'Search courses' }).fill('Figma');
   await page.getByRole('button', { name: 'Find a course', exact: true }).click();
   await expect(page).toHaveURL(/q=Figma/);
@@ -16,7 +19,8 @@ test('home, search, filters, and accessible mobile navigation', async ({ page })
   await page.getByRole('tab', { name: 'Development', exact: true }).click();
   await expect(page.locator('.course-card')).toHaveCount(2);
   await page.getByRole('button', { name: 'Filters', exact: true }).click();
-  await page.getByLabel('Experience level').selectOption('Beginner');
+  await page.getByRole('combobox', { name: 'Experience level' }).click();
+  await page.getByRole('option', { name: 'Beginner', exact: true }).click();
   await expect(page.locator('.course-card')).toHaveCount(1);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto('/');
@@ -104,6 +108,21 @@ test('course tabs, newsletter, missing page, and carousel wrap', async ({ page }
   await expect(page.getByRole('heading', { level: 1 })).toContainText('doesn’t exist');
   await page.getByRole('link', { name: 'Back to home' }).click();
   await expect(page).toHaveURL('/');
+});
+
+test('shadcn selects support keyboard navigation and update sorting', async ({ page }) => {
+  await page.goto('/courses');
+  const sort = page.getByRole('combobox', { name: 'Sort by' });
+  await expect(sort).toHaveAttribute('data-slot', 'select-trigger');
+  await sort.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('listbox')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(sort).toBeFocused();
+  await sort.click();
+  await page.getByRole('option', { name: 'Price: low to high', exact: true }).click();
+  await expect(page.locator('.course-card').first()).toContainText('Your First Website');
+  await expect(sort).toContainText('Price: low to high');
 });
 
 test('responsive pages fit the viewport', async ({ page }) => {

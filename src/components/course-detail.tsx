@@ -1,4 +1,7 @@
 'use client';
+import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+
 import { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -173,7 +176,9 @@ export function CourseDetail({
       </section>
       <div className="container detail-layout">
         <div className="detail-main">
-          <button
+          <Button
+            variant="ghost"
+            size="unstyled"
             className="course-video"
             onClick={() => setPreview(true)}
             aria-label="Play course preview"
@@ -192,10 +197,12 @@ export function CourseDetail({
             <span className="video-caption">
               A LITTLE PREVIEW OF WHAT’S POSSIBLE <span>01:00</span>
             </span>
-          </button>
+          </Button>
           <div className="detail-tabs" role="tablist" aria-label="Course information">
             {['overview', 'lessons', 'reviews'].map((t) => (
-              <button
+              <Button
+                variant="ghost"
+                size="unstyled"
                 role="tab"
                 aria-selected={tab === t}
                 className={tab === t ? 'selected' : ''}
@@ -203,7 +210,7 @@ export function CourseDetail({
                 onClick={() => changeTab(t)}
               >
                 {t.charAt(0).toUpperCase() + t.slice(1)}
-              </button>
+              </Button>
             ))}
           </div>
           <section className="tab-content" role="tabpanel">
@@ -284,7 +291,9 @@ export function CourseDetail({
                 <div className="lesson-accordion">
                   {lessonGroups.map((g, i) => (
                     <div className="lesson-group" key={g.title}>
-                      <button
+                      <Button
+                        variant="ghost"
+                        size="unstyled"
                         aria-expanded={open.includes(i)}
                         onClick={() =>
                           setOpen((o) => (o.includes(i) ? o.filter((n) => n !== i) : [...o, i]))
@@ -296,11 +305,13 @@ export function CourseDetail({
                           <small>{g.lessons.length} lessons</small>
                         </span>
                         <ChevronDown size={18} className={open.includes(i) ? 'rotate' : ''} />
-                      </button>
+                      </Button>
                       {open.includes(i) && (
                         <div className="lesson-items">
                           {g.lessons.map((l, j) => (
-                            <button
+                            <Button
+                              variant="ghost"
+                              size="unstyled"
                               key={l}
                               onClick={() =>
                                 enrolled
@@ -320,7 +331,7 @@ export function CourseDetail({
                               ) : (
                                 <span className="free-label">{enrolled ? 'Watch' : 'Preview'}</span>
                               )}
-                            </button>
+                            </Button>
                           ))}
                         </div>
                       )}
@@ -383,7 +394,9 @@ export function CourseDetail({
                   <p>Your perspective could inspire someone’s next step.</p>
                   <div className="review-rating" aria-label="Your rating">
                     {[1, 2, 3, 4, 5].map((n) => (
-                      <button
+                      <Button
+                        variant="ghost"
+                        size="unstyled"
                         type="button"
                         key={n}
                         aria-label={`Rate ${n} stars`}
@@ -391,13 +404,13 @@ export function CourseDetail({
                         onClick={() => setRating(n)}
                       >
                         <Star fill={n <= rating ? 'currentColor' : 'none'} />
-                      </button>
+                      </Button>
                     ))}
                   </div>
                   <label className="sr-only" htmlFor="review-text">
                     Your review
                   </label>
-                  <textarea
+                  <Textarea
                     id="review-text"
                     name="review"
                     required
@@ -406,10 +419,10 @@ export function CourseDetail({
                     placeholder="What did you enjoy about this course?"
                     rows={4}
                   />
-                  <button className="button button-lime">
+                  <Button variant="ghost" size="unstyled" className="button button-lime">
                     Publish review
                     <ArrowUpRight size={16} />
-                  </button>
+                  </Button>
                   <p role="status">{reviewMessage}</p>
                 </form>
               </>
@@ -423,7 +436,13 @@ export function CourseDetail({
             <span className="tag lime-tag">BEST VALUE</span>
           </div>
           <p>A small step. A lasting investment in you.</p>
-          <button className="button button-lime" disabled={busy} onClick={enroll}>
+          <Button
+            variant="ghost"
+            size="unstyled"
+            className="button button-lime"
+            disabled={busy}
+            onClick={enroll}
+          >
             {busy ? (
               <LoaderCircle size={17} className="spin" />
             ) : enrolled ? (
@@ -432,7 +451,7 @@ export function CourseDetail({
               'Start learning'
             )}
             <ArrowUpRight size={17} />
-          </button>
+          </Button>
           <span className="demo-note">Demo access is free. No payment is collected.</span>
           {error && (
             <p className="error-message" role="alert">
@@ -477,7 +496,9 @@ export function CourseDetail({
               </Link>
             </div>
           </div>
-          <button
+          <Button
+            variant="ghost"
+            size="unstyled"
             className="share-button"
             onClick={async () => {
               try {
@@ -493,7 +514,7 @@ export function CourseDetail({
           >
             <Share2 size={15} />
             {share ? 'Link copied!' : 'Good things are worth sharing'}
-          </button>
+          </Button>
         </aside>
       </div>
       <dialog
@@ -504,13 +525,15 @@ export function CourseDetail({
           if (e.target === e.currentTarget) setPreview(false);
         }}
       >
-        <button
+        <Button
+          variant="ghost"
+          size="unstyled"
           className="dialog-close"
           aria-label="Close preview"
           onClick={() => setPreview(false)}
         >
           <X />
-        </button>
+        </Button>
         {preview && (
           <>
             <video

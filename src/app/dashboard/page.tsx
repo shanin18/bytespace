@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { ArrowUpRight, BookOpen } from 'lucide-react';
@@ -54,10 +55,12 @@ export default async function Dashboard() {
               <p>
                 Your first course is waiting. Follow your curiosity and find something you love.
               </p>
-              <Link href="/courses" className="button button-lime">
-                Find your first course
-                <ArrowUpRight size={17} />
-              </Link>
+              <Button asChild variant="default">
+                <Link href="/courses" className="button button-lime">
+                  Find your first course
+                  <ArrowUpRight size={17} />
+                </Link>
+              </Button>
             </div>
           )}
           {user.role === 'creator' && (

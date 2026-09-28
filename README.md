@@ -1,6 +1,6 @@
 # ByteSpace
 
-A responsive learning-platform implementation of the supplied ByteSpace reference, using Next.js App Router, TypeScript, Tailwind CSS 4, and Lucide React. No general-purpose animation library is required.
+A responsive learning-platform implementation of the supplied ByteSpace reference, using Next.js App Router, TypeScript, Tailwind CSS 4, shadcn/ui (Radix primitives), and Lucide React. No general-purpose JavaScript animation library is required.
 
 ## Run locally
 
@@ -14,7 +14,8 @@ Open http://localhost:3000. For a production build, run `npm run build` followed
 ## Included
 
 - Home page with blue grid, lime accents, animated floating artwork, viewport-triggered reveals, and counting statistics.
-- Continuous, duplicated-track partner marquee; autoplay testimonial carousel with invisible clone-boundary reset, manual controls, pause, hover/focus pause, and reduced-motion support.
+- Continuous, duplicated-track partner marquee; autoplay testimonial carousel with invisible clone-boundary reset, previous/next controls, hover/focus pause, and reduced-motion support. No play/pause buttons.
+- Official shadcn/ui buttons, selects, inputs, textarea, checkbox, and label components in `src/components/ui/`. Brand tokens and control styling preserve the blue/lime palette. Add further components with `npx shadcn@latest add <component>`.
 - Search, category and experience filters, price/rating sorting, pagination, and empty states.
 - Course overview, curriculum, reviews, preview dialog, creator profile, register/login, learning dashboard, lesson player, and custom 404.
 - Server-side account registration/login, salted scrypt password hashing, HTTP-only session cookies, enrollment, saved lesson progress, reviews, newsletter signup storage, and downloadable worksheets.

@@ -1,8 +1,25 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
 @theme inline {
   --color-blue: #003be2;
   --color-lime: #d4fb20;
   --font-sans: var(--font-poppins), Arial, sans-serif;
+  --color-background: #ffffff;
+  --color-foreground: #171a23;
+  --color-primary: #003be2;
+  --color-primary-foreground: #ffffff;
+  --color-secondary: #d4fb20;
+  --color-secondary-foreground: #182000;
+  --color-muted: #f5f6fa;
+  --color-muted-foreground: #777b87;
+  --color-accent: #eef3ff;
+  --color-accent-foreground: #003be2;
+  --color-popover: #ffffff;
+  --color-popover-foreground: #171a23;
+  --color-border: #e4e7ee;
+  --color-input: #dce1eb;
+  --color-ring: #003be2;
+  --color-destructive: #c72e40;
 }
 :root {
   --blue: #003be2;
@@ -799,24 +816,8 @@ select:focus {
 .mark-1 {
   font-size: 38px;
 }
-.marquee:hover .marquee-track,
-.marquee.paused .marquee-track {
+.marquee:hover .marquee-track {
   animation-play-state: paused;
-}
-.marquee-pause {
-  position: absolute;
-  right: -24px;
-  top: 38px;
-  width: 24px;
-  height: 24px;
-  display: grid;
-  place-items: center;
-  color: #999;
-  background: transparent;
-  border-radius: 50%;
-}
-.marquee-pause:hover {
-  background: #ededf0;
 }
 @keyframes marquee {
   to {
@@ -3673,10 +3674,6 @@ select:focus {
   .marquee-group {
     gap: 45px;
     padding-right: 45px;
-  }
-  .marquee-pause {
-    right: -15px;
-    top: 29px;
   }
   .section-space {
     padding-block: 52px;

@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 export default function NotFound() {
@@ -13,10 +14,12 @@ export default function NotFound() {
           for doesn’t exist<span className="lime-text">.</span>
         </h1>
         <p>A little detour? Let’s get you back to discovering something great.</p>
-        <Link href="/" className="button button-lime">
-          Back to home
-          <ArrowUpRight size={16} />
-        </Link>
+        <Button asChild variant="default">
+          <Link href="/" className="button button-lime">
+            Back to home
+            <ArrowUpRight size={16} />
+          </Link>
+        </Button>
       </div>
     </section>
   );
