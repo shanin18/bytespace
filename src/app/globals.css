@@ -3,7 +3,9 @@
 @theme inline {
   --color-blue: #003be2;
   --color-lime: #d4fb20;
-  --font-sans: var(--font-poppins), Arial, sans-serif;
+  --font-sans: var(--font-satoshi), Arial, sans-serif;
+  --font-heading: var(--font-poppins), Arial, sans-serif;
+  --font-brand: var(--font-clash-display), Arial, sans-serif;
   --color-background: #ffffff;
   --color-foreground: #171a23;
   --color-primary: #003be2;
@@ -27,7 +29,6 @@
   --ink: #171a23;
   --muted: #777b87;
   --line: #e9eaf0;
-  --font-poppins: Arial, sans-serif;
 }
 * {
   box-sizing: border-box;
@@ -40,7 +41,7 @@ body {
   margin: 0;
   color: var(--ink);
   background: #fff;
-  font-family: var(--font-poppins), Arial, sans-serif;
+  font-family: var(--font-satoshi), Arial, sans-serif;
   font-size: 14px;
   -webkit-font-smoothing: antialiased;
 }
@@ -86,6 +87,15 @@ h3,
 h4,
 p {
   margin: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.course-title {
+  font-family: var(--font-poppins), Arial, sans-serif;
 }
 input,
 select,
@@ -288,52 +298,7 @@ select:focus {
   align-items: center;
   justify-content: space-between;
 }
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 23px;
-  font-weight: 700;
-  letter-spacing: -1.1px;
-  white-space: nowrap;
-}
-.logo-period {
-  color: var(--lime);
-  margin-left: -7px;
-}
-.logo-symbol {
-  width: 24px;
-  height: 26px;
-  position: relative;
-  display: inline-block;
-  margin-right: 2px;
-  transform: rotate(-8deg);
-}
-.logo-symbol i {
-  position: absolute;
-  background: var(--lime);
-  height: 11px;
-  width: 11px;
-  border-radius: 3px;
-}
-.logo-symbol i:nth-child(1) {
-  left: 0;
-  top: 0;
-}
-.logo-symbol i:nth-child(2) {
-  left: 0;
-  top: 13px;
-}
-.logo-symbol i:nth-child(3) {
-  left: 13px;
-  top: 13px;
-}
-.logo-dark {
-  color: var(--ink);
-}
-.logo-dark .logo-period {
-  color: var(--blue);
-}
+
 .nav-links {
   display: flex;
   align-items: center;

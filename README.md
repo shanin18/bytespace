@@ -25,7 +25,7 @@ Open http://localhost:3000. For a production build, run `npm run build` followed
 
 Reference: https://www.figma.com/design/3RLNLQDsiZsHbv8NSCaqpb/ByteSpace-New-Check-website--Copy-?node-id=0-1
 
-The Figma file could not be inspected directly with the available connection. Layout and visual styling were reconstructed from the supplied screenshot. Poppins is a visual estimate, not a verified Figma font. Main colors are exactly `#003BE2` and `#D4FB20`.
+The Figma file could not be inspected directly with the available connection. Layout and visual styling were reconstructed from the supplied screenshot. Typography follows the specified font families: Clash Display for the logo, Satoshi for body text/navigation/form controls, and Poppins for headings and course titles. Main colors are exactly `#003BE2` and `#D4FB20`.
 
 Original photographs, logos, copy, and exact measurements are still needed for a pixel-level match. Photos and initial course/community records are illustrative. The hero cutout was generated to approximate the composition in the reference.
 
@@ -65,3 +65,5 @@ Demo photos: Unsplash photo IDs are retained in `public/images/`. `scripts/downl
 Generated image: `public/images/learner-cutout.png`, produced with the built-in image generation tool. Prompt: “Photorealistic transparent-background cutout of a cheerful young adult female student with long wavy dark brown hair, a light blue denim shirt over a white t-shirt, headphones around her neck, holding an open graphite laptop, right hand thoughtfully touching chin, smiling at camera, framed from head to hips, natural studio lighting, no text, logos, or background.”
 
 Poppins is loaded through `next/font/google` and self-hosted by the production build. The first build requires access to Google Fonts; subsequent runtime page views do not request Google Fonts.
+
+Clash Display and Satoshi variable WOFF2 files are sourced from Fontshare and bundled in `src/app/fonts/` via `next/font/local` with `display: swap`. Their original source stylesheets are retained alongside them. `scripts/download-fonts.mjs` refreshes these assets. No runtime Fontshare requests are needed.

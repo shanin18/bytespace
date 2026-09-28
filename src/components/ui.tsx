@@ -21,16 +21,13 @@ import {
 } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { avatars, type Course } from '@/lib/courses';
+import logo from '../../public/images/logo.png';
 
 export function Logo({ dark = false }: { dark?: boolean }) {
   return (
     <Link href="/" className={`logo ${dark ? 'logo-dark' : ''}`} aria-label="ByteSpace home">
-      <span className="logo-symbol">
-        <i />
-        <i />
-        <i />
-      </span>
-      ByteSpace<span className="logo-period">.</span>
+      <Image src={logo} alt="" width={29} height={32} className="shrink-0" />
+      ByteSpace
     </Link>
   );
 }
