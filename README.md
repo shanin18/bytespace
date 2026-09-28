@@ -16,6 +16,7 @@ Open http://localhost:3000. For a production build, run `npm run build` followed
 - Home page with blue grid, lime accents, animated floating artwork, viewport-triggered reveals, and counting statistics.
 - Continuous, duplicated-track partner marquee; autoplay testimonial carousel with invisible clone-boundary reset, previous/next controls, hover/focus pause, and reduced-motion support. No play/pause buttons.
 - Official shadcn/ui buttons, selects, inputs, textarea, checkbox, and label components in `src/components/ui/`. Brand tokens and control styling preserve the blue/lime palette. Add further components with `npx shadcn@latest add <component>`.
+- Component layout, responsive behavior, hover/focus states, and shadcn overrides use Tailwind utilities in TSX. `globals.css` contains only Tailwind imports, theme tokens, and animation keyframes. Shared CTA styling lives in the shadcn Button variants (`lime`, `pill`, `pill-sm`).
 - Search, category and experience filters, price/rating sorting, pagination, and empty states.
 - Course overview, curriculum, reviews, preview dialog, creator profile, register/login, learning dashboard, lesson player, and custom 404.
 - Server-side account registration/login, salted scrypt password hashing, HTTP-only session cookies, enrollment, saved lesson progress, reviews, newsletter signup storage, and downloadable worksheets.
@@ -66,4 +67,4 @@ Generated image: `public/images/learner-cutout.png`, produced with the built-in 
 
 Poppins is loaded through `next/font/google` and self-hosted by the production build. The first build requires access to Google Fonts; subsequent runtime page views do not request Google Fonts.
 
-Clash Display and Satoshi variable WOFF2 files are sourced from Fontshare and bundled in `src/app/fonts/` via `next/font/local` with `display: swap`. Their original source stylesheets are retained alongside them. `scripts/download-fonts.mjs` refreshes these assets. No runtime Fontshare requests are needed.
+Clash Display and Satoshi variable WOFF2 files are sourced from Fontshare and bundled in `src/app/fonts/` via `next/font/local` with `display: swap`. Original source references are retained as `.txt` files alongside them, not imported stylesheets. `scripts/download-fonts.mjs` refreshes these assets. No runtime Fontshare requests are needed.

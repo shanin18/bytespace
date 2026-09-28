@@ -31,15 +31,24 @@ export default function Help() {
   return (
     <>
       <PageBanner eyebrow="WE’RE HERE TO HELP" title="A little guidance goes a long way." />
-      <div className="container prose-page">
+      <div className="site-container mx-auto w-[min(1120px,_calc(100%_-_80px))] max-[1100px]:w-[calc(100%_-_60px)] max-[900px]:w-[calc(100%_-_48px)] max-[540px]:w-[calc(100%_-_36px)] prose-page max-w-[760px] pt-15 pb-20 [&_h2]:mx-0 [&_h2]:text-[21px] [&_h2]:mt-7.5 [&_h2]:mb-3 [&_h2:first-child]:mt-0 [&_p]:text-[12px] [&_p]:text-[#77808f] [&_p]:leading-[2] [&_p]:mb-[15px] [&_li]:text-[12px] [&_li]:text-[#77808f] [&_li]:leading-[2] [&_a]:text-blue max-[540px]:pt-10 max-[540px]:pb-[55px]">
         {faqs.map(([q, a]) => (
-          <details className="help-item" key={q}>
+          <details
+            className="help-item px-0 py-5 [border-bottom:1px_solid_var(--color-line)] [&_summary]:text-[14px] [&_summary]:font-medium [&_summary]:cursor-pointer [&_p]:pt-3.5"
+            key={q}
+          >
             <summary>{q}</summary>
             <p>{a}</p>
           </details>
         ))}
         <p className="mt-8">
-          Ready to explore? <Link href="/courses">Find your next course →</Link>
+          Ready to explore?{' '}
+          <Link
+            className="touch-manipulation [-webkit-tap-highlight-color:transparent] focus-visible:outline-[3px_solid_#87a6ff] focus-visible:outline-offset-[5px]"
+            href="/courses"
+          >
+            Find your next course →
+          </Link>
         </p>
       </div>
     </>

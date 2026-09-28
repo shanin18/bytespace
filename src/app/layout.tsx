@@ -3,7 +3,6 @@ import { Poppins } from 'next/font/google';
 import localFont from 'next/font/local';
 import { Header, Footer } from '@/components/ui';
 import './globals.css';
-import './controls.css';
 const satoshi = localFont({
   src: './fonts/satoshi-variable.woff2',
   weight: '300 900',
@@ -34,9 +33,19 @@ export const metadata: Metadata = {
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={`${satoshi.variable} ${clashDisplay.variable} ${poppins.variable}`}>
-        <a className="skip-link" href="#main">
+    <html className="scroll-smooth scroll-pt-[30px] motion-reduce:scroll-auto" lang="en">
+      <body
+        className={[
+          'm-0 bg-white text-foreground font-sans text-sm leading-normal antialiased selection:bg-lime selection:text-foreground motion-reduce:[&_*]:animate-none! motion-reduce:[&_*]:transition-none! motion-reduce:[&_*]:scroll-auto!',
+          `${satoshi.variable} ${clashDisplay.variable} ${poppins.variable}`,
+        ]
+          .filter(Boolean)
+          .join(' ')}
+      >
+        <a
+          className="touch-manipulation [-webkit-tap-highlight-color:transparent] focus-visible:outline-[3px_solid_#87a6ff] focus-visible:outline-offset-[5px] skip-link p-[15px] fixed top-[-80px] left-5 z-1000 bg-lime rounded-[8px] [&:focus]:top-2.5"
+          href="#main"
+        >
           Skip to content
         </a>
         <Header />

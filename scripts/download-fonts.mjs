@@ -14,6 +14,6 @@ for (const family of ['clash-display', 'satoshi']) {
   const bytes = Buffer.from(await font.arrayBuffer());
   if (bytes.subarray(0, 4).toString() !== 'wOF2') throw new Error('Invalid WOFF2 file');
   await writeFile(`src/app/fonts/${family}-variable.woff2`, bytes);
-  await writeFile(`src/app/fonts/${family}-source.css`, `/* Source: ${source} */\n${css}`);
+  await writeFile(`src/app/fonts/${family}-source.txt`, `/* Source: ${source} */\n${css}`);
   console.log(`${family}: ${bytes.length} bytes; ${face.match(/font-weight:[^;]+/)?.[0]}`);
 }
