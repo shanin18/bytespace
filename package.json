@@ -1,0 +1,34 @@
+{
+  "name": "bytespace",
+  "version": "1.0.0",
+  "description": "ByteSpace learning platform — Next.js, Tailwind CSS, and TypeScript",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test",
+    "format": "prettier --write src tests scripts *.ts *.mjs *.json README.md",
+    "format:check": "prettier --check src tests scripts *.ts *.mjs *.json README.md"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lucide-react": "^1.48.0",
+    "next": "^16.3.6",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.3",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "prettier": "^3.9.9",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
+  }
+}
