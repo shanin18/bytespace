@@ -1,7 +1,9 @@
 'use client';
+import { Button } from '@/components/ui/button';
+
 import { useEffect, useState, useCallback, type CSSProperties } from 'react';
 import Image from 'next/image';
-import { Check, ChevronLeft, ChevronRight, Pause, Play } from 'lucide-react';
+import { Check, ChevronLeft, ChevronRight } from 'lucide-react';
 import { avatars } from '@/lib/courses';
 
 const testimonials = [
@@ -44,7 +46,6 @@ const testimonials = [
 
 export function Testimonials() {
   const [index, setIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const [transition, setTransition] = useState(true);
@@ -75,10 +76,10 @@ export function Testimonials() {
     return () => clearTimeout(timer);
   }, [index, transition, reducedMotion, finish]);
   useEffect(() => {
-    if (paused || hovered || focused || reducedMotion) return;
+    if (hovered || focused || reducedMotion) return;
     const timer = setInterval(() => setIndex((i) => Math.min(i + 1, testimonials.length)), 4200);
     return () => clearInterval(timer);
-  }, [paused, hovered, focused, reducedMotion]);
+  }, [hovered, focused, reducedMotion]);
   function move(direction: number) {
     if (index === 0 && direction < 0) {
       if (reducedMotion) {
@@ -170,7 +171,9 @@ export function Testimonials() {
           <div className="carousel-controls">
             <div className="carousel-dots">
               {testimonials.map((_, i) => (
-                <button
+                <Button
+                  variant="ghost"
+                  size="unstyled"
                   key={i}
                   aria-label={`Show testimonial ${i + 1}`}
                   aria-current={index % testimonials.length === i}
@@ -180,18 +183,22 @@ export function Testimonials() {
               ))}
             </div>
             <div className="carousel-buttons">
-              <button
-                aria-label={paused ? 'Resume testimonials' : 'Pause testimonials'}
-                onClick={() => setPaused((p) => !p)}
+              <Button
+                variant="ghost"
+                size="unstyled"
+                aria-label="Previous testimonial"
+                onClick={() => move(-1)}
               >
-                {paused ? <Play size={15} /> : <Pause size={15} />}
-              </button>
-              <button aria-label="Previous testimonial" onClick={() => move(-1)}>
                 <ChevronLeft size={18} />
-              </button>
-              <button aria-label="Next testimonial" onClick={() => move(1)}>
+              </Button>
+              <Button
+                variant="ghost"
+                size="unstyled"
+                aria-label="Next testimonial"
+                onClick={() => move(1)}
+              >
                 <ChevronRight size={18} />
-              </button>
+              </Button>
             </div>
           </div>
         </div>

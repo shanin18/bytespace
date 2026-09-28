@@ -1,4 +1,6 @@
 'use client';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import Link from 'next/link';
@@ -13,8 +15,6 @@ import {
   Search,
   Star,
   X,
-  Play,
-  Pause,
   ChevronLeft,
   ChevronRight,
   Sparkles,
@@ -71,18 +71,22 @@ export function Header() {
               Log in
             </Link>
           )}
-          <Link href={user ? '/dashboard' : '/register'} className="button button-lime small">
-            {user ? 'My learning' : 'Get started'}
-            <ArrowUpRight size={15} />
-          </Link>
-          <button
+          <Button asChild variant="default">
+            <Link href={user ? '/dashboard' : '/register'} className="button button-lime small">
+              {user ? 'My learning' : 'Get started'}
+              <ArrowUpRight size={15} />
+            </Link>
+          </Button>
+          <Button
+            variant="ghost"
+            size="unstyled"
             className="mobile-toggle"
             onClick={() => setOpen(!open)}
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
             {open ? <X /> : <Menu />}
-          </button>
+          </Button>
         </div>
       </div>
     </header>
@@ -126,7 +130,7 @@ export function Footer() {
               <label className="sr-only" htmlFor="newsletter-email">
                 Email address
               </label>
-              <input
+              <Input
                 id="newsletter-email"
                 name="email"
                 type="email"
@@ -134,10 +138,15 @@ export function Footer() {
                 placeholder="Your email address"
                 maxLength={254}
               />
-              <button disabled={busy} className="button button-lime small">
+              <Button
+                variant="ghost"
+                size="unstyled"
+                disabled={busy}
+                className="button button-lime small"
+              >
                 {busy ? 'Joining…' : 'Stay curious'}
                 <ArrowUpRight size={15} />
-              </button>
+              </Button>
             </form>
             <span className="form-message" role="status">
               {status}
@@ -193,16 +202,16 @@ export function SearchBox({ large = false, initial = '' }: { large?: boolean; in
       }}
     >
       <Search size={19} />
-      <input
+      <Input
         aria-label="Search courses"
         name="q"
         placeholder="What do you want to learn?"
         defaultValue={initial}
       />
-      <button className="button button-lime" type="submit">
+      <Button variant="ghost" size="unstyled" className="button button-lime" type="submit">
         Find a course
         <ArrowUpRight size={16} />
-      </button>
+      </Button>
     </form>
   );
 }
@@ -364,12 +373,11 @@ export function Decorations() {
 
 const partners = ['logolpsum', 'Layers', 'Quotient', 'Circooles', 'Sisyphus', 'Capsule'];
 export function PartnerMarquee() {
-  const [paused, setPaused] = useState(false);
   return (
     <section className="partners" aria-label="Our learning partners">
       <div className="container partners-inner">
         <p>BIG IDEAS. GREAT COMPANY.</p>
-        <div className={`marquee ${paused ? 'paused' : ''}`}>
+        <div className="marquee">
           <div className="marquee-track">
             {[0, 1].map((copy) => (
               <div className="marquee-group" key={copy} aria-hidden={copy === 1}>
@@ -385,13 +393,6 @@ export function PartnerMarquee() {
             ))}
           </div>
         </div>
-        <button
-          className="marquee-pause"
-          onClick={() => setPaused(!paused)}
-          aria-label={paused ? 'Play partner animation' : 'Pause partner animation'}
-        >
-          {paused ? <Play size={12} /> : <Pause size={12} />}
-        </button>
       </div>
     </section>
   );
@@ -433,10 +434,12 @@ export function CTA() {
           You have something worth sharing. Turn your expertise into inspiring
           <br className="desktop-break" /> courses and help a world of curious minds grow.
         </p>
-        <Link href="/register?role=creator" className="button button-lime">
-          Become a creator
-          <ArrowUpRight size={17} />
-        </Link>
+        <Button asChild variant="default">
+          <Link href="/register?role=creator" className="button button-lime">
+            Become a creator
+            <ArrowUpRight size={17} />
+          </Link>
+        </Button>
       </Reveal>
     </section>
   );

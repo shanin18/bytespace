@@ -1,4 +1,7 @@
 'use client';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -6,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import { ArrowUpRight, Eye, EyeOff, LoaderCircle, Check } from 'lucide-react';
 import { Spring, Avatars } from './ui';
 import { courses } from '@/lib/courses';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Label } from '@/components/ui/label';
 
 export function AuthForm({
   mode,
@@ -124,7 +129,7 @@ export function AuthForm({
             {register && (
               <label>
                 Full name
-                <input
+                <Input
                   name="name"
                   autoComplete="name"
                   placeholder="Your full name"
@@ -136,7 +141,7 @@ export function AuthForm({
             )}
             <label>
               Email address
-              <input
+              <Input
                 name="email"
                 type="email"
                 autoComplete="email"
@@ -148,7 +153,7 @@ export function AuthForm({
             <label>
               Password
               <div className="password-field">
-                <input
+                <Input
                   name="password"
                   type={show ? 'text' : 'password'}
                   autoComplete={register ? 'new-password' : 'current-password'}
@@ -159,30 +164,37 @@ export function AuthForm({
                   minLength={8}
                   maxLength={128}
                 />
-                <button
+                <Button
+                  variant="ghost"
+                  size="unstyled"
                   type="button"
                   aria-label={show ? 'Hide password' : 'Show password'}
                   onClick={() => setShow(!show)}
                 >
                   {show ? <EyeOff size={18} /> : <Eye size={18} />}
-                </button>
+                </Button>
               </div>
             </label>
             {register && (
-              <label className="checkbox-label">
-                <input type="checkbox" required />
+              <Label className="checkbox-label" htmlFor="accept-terms">
+                <Checkbox id="accept-terms" name="terms" required />
                 <span>
                   I agree to the <Link href="/terms">Terms of service</Link> and{' '}
                   <Link href="/privacy">Privacy policy</Link>.
                 </span>
-              </label>
+              </Label>
             )}
             {error && (
               <p className="error-message" role="alert">
                 {error}
               </p>
             )}
-            <button disabled={busy} className="button button-lime auth-submit">
+            <Button
+              variant="ghost"
+              size="unstyled"
+              disabled={busy}
+              className="button button-lime auth-submit"
+            >
               {busy ? (
                 <LoaderCircle size={17} className="spin" />
               ) : register ? (
@@ -191,7 +203,7 @@ export function AuthForm({
                 'Let’s get learning'
               )}
               <ArrowUpRight size={17} />
-            </button>
+            </Button>
           </form>
           <p className="auth-switch">
             {register ? 'Already part of the community?' : 'New around here?'}{' '}

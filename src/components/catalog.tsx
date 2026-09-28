@@ -1,4 +1,7 @@
 'use client';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+
 import { useState } from 'react';
 import Link from 'next/link';
 import {
@@ -11,6 +14,13 @@ import {
 } from 'lucide-react';
 import { categories, courses } from '@/lib/courses';
 import { CourseCard, Reveal } from './ui';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 export function HomeCourses() {
   const [category, setCategory] = useState('All courses');
@@ -21,7 +31,9 @@ export function HomeCourses() {
     <>
       <div className="category-tabs" role="tablist" aria-label="Course categories">
         {categories.map((c) => (
-          <button
+          <Button
+            variant="ghost"
+            size="unstyled"
             key={c}
             role="tab"
             aria-selected={category === c}
@@ -29,7 +41,7 @@ export function HomeCourses() {
             onClick={() => setCategory(c)}
           >
             {c}
-          </button>
+          </Button>
         ))}
       </div>
       <div className="course-grid">
@@ -40,9 +52,11 @@ export function HomeCourses() {
         ))}
       </div>
       <div className="center-button">
-        <Link href="/courses" className="button button-outline">
-          Explore all courses <ArrowUpRight size={17} />
-        </Link>
+        <Button asChild variant="outline">
+          <Link href="/courses" className="button button-outline">
+            Explore all courses <ArrowUpRight size={17} />
+          </Link>
+        </Button>
       </div>
     </>
   );
@@ -101,7 +115,7 @@ export function CourseCatalog({
             }}
           >
             <Search size={18} />
-            <input
+            <Input
               aria-label="Search courses"
               placeholder="What do you want to learn?"
               value={query}
@@ -111,7 +125,9 @@ export function CourseCatalog({
               }}
             />
             {query && (
-              <button
+              <Button
+                variant="ghost"
+                size="unstyled"
                 className="clear-search"
                 type="button"
                 aria-label="Clear search"
@@ -121,25 +137,27 @@ export function CourseCatalog({
                 }}
               >
                 <X size={16} />
-              </button>
+              </Button>
             )}
-            <button className="button button-lime">
+            <Button variant="ghost" size="unstyled" className="button button-lime">
               Search
               <ArrowUpRight size={16} />
-            </button>
+            </Button>
           </form>
         </div>
       </section>
       <section id="catalog" className="catalog section-space">
         <div className="container">
           <div className="catalog-toolbar">
-            <button
+            <Button
+              variant="ghost"
+              size="unstyled"
               className={`filter-button ${filters ? 'active' : ''}`}
               onClick={() => setFilters(!filters)}
               aria-expanded={filters}
             >
               <SlidersHorizontal size={16} /> Filters
-            </button>
+            </Button>
             <span className="result-count">
               Showing {filtered.length} courses
               {query && (
@@ -149,39 +167,51 @@ export function CourseCatalog({
                 </>
               )}
             </span>
-            <label className="sort-select">
-              Sort by:{' '}
-              <select
+            <div className="sort-select">
+              <span id="sort-label">Sort by</span>
+              <Select
                 value={sort}
-                onChange={(e) => {
-                  setSort(e.target.value);
+                onValueChange={(value) => {
+                  setSort(value);
                   resetPage();
                 }}
               >
-                <option value="popular">Most popular</option>
-                <option value="rating">Highest rated</option>
-                <option value="price-low">Price: low to high</option>
-                <option value="price-high">Price: high to low</option>
-              </select>
-            </label>
+                <SelectTrigger aria-labelledby="sort-label" className="catalog-select">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent position="popper" sideOffset={8}>
+                  <SelectItem value="popular">Most popular</SelectItem>
+                  <SelectItem value="rating">Highest rated</SelectItem>
+                  <SelectItem value="price-low">Price: low to high</SelectItem>
+                  <SelectItem value="price-high">Price: high to low</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
           {filters && (
             <div className="filter-panel">
-              <label>
-                Experience level
-                <select
+              <div className="filter-field">
+                <span id="level-label">Experience level</span>
+                <Select
                   value={level}
-                  onChange={(e) => {
-                    setLevel(e.target.value);
+                  onValueChange={(value) => {
+                    setLevel(value);
                     resetPage();
                   }}
                 >
-                  <option>All levels</option>
-                  <option>Beginner</option>
-                  <option>Intermediate</option>
-                </select>
-              </label>
-              <button
+                  <SelectTrigger aria-labelledby="level-label" className="catalog-select">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent position="popper" sideOffset={8}>
+                    <SelectItem value="All levels">All levels</SelectItem>
+                    <SelectItem value="Beginner">Beginner</SelectItem>
+                    <SelectItem value="Intermediate">Intermediate</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <Button
+                variant="ghost"
+                size="unstyled"
                 className="text-link"
                 onClick={() => {
                   setLevel('All levels');
@@ -191,12 +221,14 @@ export function CourseCatalog({
                 }}
               >
                 Reset filters <X size={14} />
-              </button>
+              </Button>
             </div>
           )}
           <div className="category-tabs" role="tablist" aria-label="Filter by category">
             {categories.map((c) => (
-              <button
+              <Button
+                variant="ghost"
+                size="unstyled"
                 key={c}
                 role="tab"
                 aria-selected={category === c}
@@ -207,7 +239,7 @@ export function CourseCatalog({
                 }}
               >
                 {c}
-              </button>
+              </Button>
             ))}
           </div>
           {filtered.length ? (
@@ -221,7 +253,9 @@ export function CourseCatalog({
               <Search size={38} />
               <h2>A little more exploring?</h2>
               <p>No courses match these filters. Try another topic or reset your search.</p>
-              <button
+              <Button
+                variant="ghost"
+                size="unstyled"
                 className="button button-lime"
                 onClick={() => {
                   setQuery('');
@@ -230,35 +264,41 @@ export function CourseCatalog({
                 }}
               >
                 Show all courses
-              </button>
+              </Button>
             </div>
           )}
           {pages > 1 && (
             <nav className="pagination" aria-label="Course pages">
-              <button
+              <Button
+                variant="ghost"
+                size="unstyled"
                 disabled={page === 1}
                 aria-label="Previous page"
                 onClick={() => setPage((p) => p - 1)}
               >
                 <ChevronLeft size={16} />
-              </button>
+              </Button>
               {Array.from({ length: pages }, (_, i) => (
-                <button
+                <Button
+                  variant="ghost"
+                  size="unstyled"
                   key={i}
                   aria-current={page === i + 1 ? 'page' : undefined}
                   className={page === i + 1 ? 'selected' : ''}
                   onClick={() => setPage(i + 1)}
                 >
                   {i + 1}
-                </button>
+                </Button>
               ))}
-              <button
+              <Button
+                variant="ghost"
+                size="unstyled"
                 disabled={page === pages}
                 aria-label="Next page"
                 onClick={() => setPage((p) => p + 1)}
               >
                 <ChevronRight size={16} />
-              </button>
+              </Button>
             </nav>
           )}
         </div>

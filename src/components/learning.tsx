@@ -1,4 +1,6 @@
 'use client';
+import { Button } from '@/components/ui/button';
+
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -19,7 +21,9 @@ export function Logout() {
   const [error, setError] = useState('');
   return (
     <div>
-      <button
+      <Button
+        variant="ghost"
+        size="unstyled"
         className="button button-outline small"
         disabled={busy}
         onClick={async () => {
@@ -37,7 +41,7 @@ export function Logout() {
       >
         {busy ? 'Signing out…' : 'Sign out'}
         <LogOut size={14} />
-      </button>
+      </Button>
       {error && <p role="alert">{error}</p>}
     </div>
   );
@@ -112,24 +116,37 @@ export function LessonPlayer({
           next.
         </p>
         <div className="lesson-actions">
-          <button disabled={busy || completed} className="button button-lime" onClick={complete}>
+          <Button
+            variant="ghost"
+            size="unstyled"
+            disabled={busy || completed}
+            className="button button-lime"
+            onClick={complete}
+          >
             {busy ? (
               <LoaderCircle size={16} className="spin" />
             ) : completed ? (
               <CheckCircle2 size={16} />
             ) : null}
             {completed ? 'Lesson completed' : 'Mark as complete'}
-          </button>
+          </Button>
           {active < all.length - 1 ? (
-            <button className="button button-outline" onClick={() => select(active + 1)}>
+            <Button
+              variant="ghost"
+              size="unstyled"
+              className="button button-outline"
+              onClick={() => select(active + 1)}
+            >
               Next lesson
               <ArrowRight size={16} />
-            </button>
+            </Button>
           ) : (
-            <Link className="button button-outline" href={`/courses/${course.id}?tab=reviews`}>
-              Share your experience
-              <ArrowRight size={16} />
-            </Link>
+            <Button asChild variant="outline">
+              <Link className="button button-outline" href={`/courses/${course.id}?tab=reviews`}>
+                Share your experience
+                <ArrowRight size={16} />
+              </Link>
+            </Button>
           )}
         </div>
         {error && (
@@ -146,10 +163,12 @@ export function LessonPlayer({
             <CheckCircle2 size={40} />
             <h2>Look how far you’ve come!</h2>
             <p>You’ve completed every lesson. Keep the momentum going with your next course.</p>
-            <Link href="/courses" className="button button-lime">
-              Explore your next step
-              <ArrowRight size={16} />
-            </Link>
+            <Button asChild variant="default">
+              <Link href="/courses" className="button button-lime">
+                Explore your next step
+                <ArrowRight size={16} />
+              </Link>
+            </Button>
           </div>
         )}
       </div>
@@ -176,7 +195,9 @@ export function LessonPlayer({
             {g.lessons.map((l) => {
               const index = all.indexOf(l);
               return (
-                <button
+                <Button
+                  variant="ghost"
+                  size="unstyled"
                   key={l}
                   className={active === index ? 'active' : ''}
                   aria-current={active === index ? 'step' : undefined}
@@ -190,7 +211,7 @@ export function LessonPlayer({
                     <Circle size={15} />
                   )}
                   <span>{l}</span>
-                </button>
+                </Button>
               );
             })}
           </div>
